@@ -1,0 +1,10 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "globe-party",
+  "main": "src/server.ts",
+  "compatibilityDate": "2024-01-27",
+  "serve": {
+    "path": "public",
+    "build": "src/client.ts"
+  }
+}

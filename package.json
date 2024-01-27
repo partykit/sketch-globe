@@ -1,0 +1,16 @@
+{
+  "name": "globe-party",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "partykit dev",
+    "deploy": "partykit deploy"
+  },
+  "dependencies": {
+    "partysocket": "^0.0.25"
+  },
+  "devDependencies": {
+    "partykit": "^0.0.79",
+    "typescript": "^5.3.3"
+  }
+}
