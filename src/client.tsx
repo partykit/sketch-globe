@@ -8,8 +8,7 @@ import createGlobe from "cobe";
 // The type of messages we'll be receieving to the server
 import type { OutgoingMessage } from "./server";
 
-type Positions = Map<string, Marker>;
-
+// each marker has a location and a size
 type Marker = {
   location: [number, number];
   size: number;
@@ -24,7 +23,7 @@ function App() {
   // Note that we use a ref because the globe's `onRender` callback
   // is called on every animation frame, and we don't want to re-render
   // the component on every frame.
-  const positions = useRef<Positions>(new Map());
+  const positions = useRef<Map<string, Marker>>(new Map());
   // Connect to the PartyKit server
   const socket = usePartySocket({
     room: "default",

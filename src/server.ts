@@ -18,6 +18,7 @@ export type OutgoingMessage =
       id: string;
     };
 
+// This is the state that we'll store on each connection
 type ConnectionState = {
   position: Position;
 };
@@ -36,7 +37,7 @@ export default class Server implements Party.Server {
     conn: Party.Connection<ConnectionState>,
     ctx: Party.ConnectionContext
   ) {
-    // Whenever a fresh connection is made, we'll send the entire state to the new connection
+    // Whenever a fresh connection is made, we'll
     // send the entire state to the new connection
 
     // First, let's extract the position from the Cloudflare headers
