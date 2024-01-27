@@ -1,3 +1,3 @@
 ## 🎈 globe-party
 
-Welcome to the party, pal!
+[Cobe](https://cobe.vercel.app/) ⤫ PartyKit

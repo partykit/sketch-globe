@@ -81,12 +81,12 @@ function App() {
         Powered by <a href="https://cobe.vercel.app/">🌏 Cobe</a> and{" "}
         <a href="https://partykit.io/">🎈PartyKit</a>
       </p>
-      <p>
+      {/* <p>
         Code:{" "}
         <a href="https://github.com/partykit/sketch-globe">
           https://github.com/partykit/sketch-globe
         </a>
-      </p>
+      </p> */}
     </div>
   );
 }
