@@ -62,6 +62,16 @@ export default class Server implements Party.Server {
             position: connection.state!.position,
           } satisfies OutgoingMessage)
         );
+
+        // And let's send the new connection's position to all other connections
+        if (connection.id !== conn.id) {
+          connection.send(
+            JSON.stringify({
+              type: "add-marker",
+              position: conn.state!.position,
+            } satisfies OutgoingMessage)
+          );
+        }
       } catch (err) {
         this.onCloseOrError(conn);
       }
@@ -76,7 +86,8 @@ export default class Server implements Party.Server {
       JSON.stringify({
         type: "remove-marker",
         id: connection.id,
-      } satisfies OutgoingMessage)
+      } satisfies OutgoingMessage),
+      [connection.id]
     );
   }
 
