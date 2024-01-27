@@ -5,14 +5,8 @@ import { createRoot } from "react-dom/client";
 import usePartySocket from "partysocket/react";
 import createGlobe from "cobe";
 
-// The type of messages we'll be receieving to the server
+// The type of messages we'll be receiving from the server
 import type { OutgoingMessage } from "./server";
-
-// each marker has a location and a size
-type Marker = {
-  location: [number, number];
-  size: number;
-};
 
 function App() {
   // A reference to the canvas element where we'll render the globe
@@ -23,7 +17,15 @@ function App() {
   // Note that we use a ref because the globe's `onRender` callback
   // is called on every animation frame, and we don't want to re-render
   // the component on every frame.
-  const positions = useRef<Map<string, Marker>>(new Map());
+  const positions = useRef<
+    Map<
+      string,
+      {
+        location: [number, number];
+        size: number;
+      }
+    >
+  >(new Map());
   // Connect to the PartyKit server
   const socket = usePartySocket({
     room: "default",
