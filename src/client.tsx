@@ -31,7 +31,6 @@ function App() {
     onMessage(evt) {
       const message = JSON.parse(evt.data) as OutgoingMessage;
       if (message.type === "add-marker") {
-        console.log("add-marker");
         // Add the marker to our map
         positions.current.set(message.position.id, {
           location: [message.position.lat, message.position.lng],
