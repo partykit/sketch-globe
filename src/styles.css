@@ -10,7 +10,10 @@ body {
   font-family: sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #333;
+  color: #ccc;
+  background-color: black;
+  text-align: center;
+  padding-top: 40px;
 }
 
 h1,

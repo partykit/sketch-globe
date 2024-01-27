@@ -1,30 +1,78 @@
 import type * as Party from "partykit/server";
 
+type Position = {
+  lat: number;
+  lng: number;
+  id: string;
+};
+
+export type OutgoingMessage =
+  | {
+      type: "add-marker";
+      position: Position;
+    }
+  | {
+      type: "remove-marker";
+      id: string;
+    };
+
+type ConnectionState = {
+  position: Position;
+};
+
 export default class Server implements Party.Server {
+  static options = {
+    hibernate: true,
+  };
   constructor(readonly room: Party.Room) {}
+  onConnect(
+    conn: Party.Connection<ConnectionState>,
+    ctx: Party.ConnectionContext
+  ) {
+    // send the entire state to the new connection
+    const { request } = ctx;
+    const lat = parseFloat(request.cf!.latitude as string);
+    const lng = parseFloat(request.cf!.longitude as string);
+    const id = conn.id;
+    conn.setState({
+      position: {
+        lat,
+        lng,
+        id,
+      },
+    });
 
-  onConnect(conn: Party.Connection, ctx: Party.ConnectionContext) {
-    // A websocket just connected!
-    console.log(
-      `Connected:
-  id: ${conn.id}
-  room: ${this.room.id}
-  url: ${new URL(ctx.request.url).pathname}`
-    );
-
-    // let's send a message to the connection
-    conn.send("hello from server");
+    for (const connection of this.room.getConnections<ConnectionState>()) {
+      try {
+        conn.send(
+          JSON.stringify({
+            type: "add-marker",
+            position: connection.state!.position,
+          } satisfies OutgoingMessage)
+        );
+      } catch (err) {
+        this.onCloseOrError(conn);
+      }
+    }
   }
 
-  onMessage(message: string, sender: Party.Connection) {
-    // let's log the message
-    console.log(`connection ${sender.id} sent message: ${message}`);
-    // as well as broadcast it to all the other connections in the room...
+  onCloseOrError(connection: Party.Connection<unknown>) {
     this.room.broadcast(
-      `${sender.id}: ${message}`,
-      // ...except for the connection it came from
-      [sender.id]
+      JSON.stringify({
+        type: "remove-marker",
+        id: connection.id,
+      } satisfies OutgoingMessage)
     );
+  }
+
+  onClose(connection: Party.Connection<unknown>): void | Promise<void> {
+    this.onCloseOrError(connection);
+  }
+  onError(
+    connection: Party.Connection<unknown>,
+    error: Error
+  ): void | Promise<void> {
+    this.onCloseOrError(connection);
   }
 }
 

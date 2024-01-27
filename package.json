@@ -7,7 +7,12 @@
     "deploy": "partykit deploy"
   },
   "dependencies": {
-    "partysocket": "^0.0.25"
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "cobe": "^0.6.3",
+    "partysocket": "^0.0.25",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "partykit": "^0.0.79",

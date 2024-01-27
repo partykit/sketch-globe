@@ -5,6 +5,6 @@
   "compatibilityDate": "2024-01-27",
   "serve": {
     "path": "public",
-    "build": "src/client.ts"
+    "build": "src/client.tsx"
   }
 }
