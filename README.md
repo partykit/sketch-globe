@@ -2,6 +2,10 @@
 
 [Cobe](https://cobe.vercel.app/) ⤫ [Phenomenon](https://www.npmjs.com/package/phenomenon) ⤫ [PartyKit](https://partykit.io/)
 
+![image](https://github.com/partykit/sketch-globe/assets/18808/bc199d85-4f8f-4a71-b833-7af48ddebc65)
+
+
+
 You've always wanted to show a spinning globe on your website that shows the location of every person on that page, right? Well, now you can!
 
 This project has been made possible by the amazing [Cobe](https://cobe.vercel.app/) and [Phenomenon](https://www.npmjs.com/package/phenomenon) libraries. It's a fun little experiment that I hope you'll enjoy.
